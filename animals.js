@@ -26,6 +26,16 @@ function newDuck(spec = {}){
   return Object.freeze({ name, word, talk, fly, walk, swim });
 }
 
+function newSnake(spec = {}){
+  let { name = 'snake', word = 'hissss' } = spec,
+      { talk } = newAnimal({ name, word }),
+      { swim } = newAnimalMovement({ name }),
+      // override
+      fly = () => console.log(name + ' is flying: ...on a plane. How else?'),
+      slither = () => console.log(name + ' is slithering: swish swish');
+  return Object.freeze({ name, word, talk, slither, swim, fly });
+}
+
 //////////////////////////////////////
 
 let typicalGator = newAlligator({ name: 'alligator', word: 'grrrr' });
@@ -46,3 +56,8 @@ duck.swim();
 
 let animal = newAnimal({name: 'Animal from the Muppets'});
 animal.talk();
+
+let snake = newSnake({ name: 'Jake the Snake' });
+snake.talk();
+snake.slither();
+snake.fly();
